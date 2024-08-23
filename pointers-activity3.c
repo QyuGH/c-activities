@@ -5,6 +5,7 @@ int main(){
     printf("Input the number of elements to store in the array: ");
     scanf("%d", &size);
 
+    printf("Input %d number of elements in the array: \n", size);
     int myArray[size];
     for (int i = 0; i < size; i++){
         printf("Element - %d: ", i);
@@ -20,4 +21,6 @@ int main(){
     for (int i = 0; i < size; i++){
         printf("Element - %d: %d\n", i, *arrPtr[i]);
     }
+
+    return 0;
 }

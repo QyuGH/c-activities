@@ -18,4 +18,6 @@ int main(){
     else {
         printf("%d is the Maximum Number.", (*numPtr2));
     }
+
+    return 0;
 }

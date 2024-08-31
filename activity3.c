@@ -3,7 +3,7 @@
 int main(){
     int array[5];
 
-    printf("Enter five numbers: ");
+    printf("Enter five numbers: \n");
     for (int i = 0; i < 5; i++){
         scanf("%d", &array[i]);
     }

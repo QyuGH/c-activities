@@ -43,17 +43,17 @@ int main(){
     scanf("%d", &shapeChoice);
 
 
-    int rectangleHeight, rectangWidth;
+    int rectangleHeight, rectangleWidth;
     int sideLength;
     int base, triangleHeight;
     switch (shapeChoice){
         case 1:
             printRectangle();
             printf("Enter width: ");
-            scanf("%d", &rectangWidth);
+            scanf("%d", &rectangleWidth);
             printf("Enter height: ");
             scanf("%d", &rectangleHeight);
-            printf("Area of Rectangle is: %d", (rectangleHeight * rectangWidth));
+            printf("Area of Rectangle is: %d", (rectangleHeight * rectangleWidth));
             break;
         case 2:
             printSquare();

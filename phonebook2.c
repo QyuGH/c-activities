@@ -55,7 +55,7 @@ int main(){
 void options(){
     char *optionArr[6] = {"Add Entry","View Entry","Edit Entry","Delete Entry","Search Entry","Exit"};
 
-    printf("Press: \n");
+    printf("Press, \n");
     for (int i = 0; i < 6; i++){
         printf("%d. %s\n", i+1, optionArr[i]);
     }
@@ -119,12 +119,12 @@ void addContact(){
             validName = checkName(contact[totalContact].name);
 
             if (validName){
-                printf("Name already exists. Please enter a new one.\n");
+                printf("Name already exists, please enter a new one.\n");
             }
         }while(validName);
 
         do{
-            printf("Enter contact number: \n");
+            printf("Enter Contact Number: \n");
             fgets(contact[totalContact].contactNum, sizeof(contact[totalContact].contactNum), stdin);
             contact[totalContact].contactNum[strcspn(contact[totalContact].contactNum, "\n")] = 0;
 
@@ -176,6 +176,7 @@ void loopAdd(){
 void viewContact(){
     if (totalContact == 0){
         printf("No available contacts yet.\n");
+        getch();
         return;
     }
     else {
@@ -186,7 +187,8 @@ void viewContact(){
         }
     }
 
-    printf("Press any key to continue...\n");
+    printf("Press Any Key To Exit!\n");
+    getch();
     return;
 }
 
@@ -197,6 +199,8 @@ void searchEntry(){
 
     if (totalContact == 0){
         printf("No available contacts yet.\n");
+        printf("Press Any Key To Exit!\n");
+        getch();
         return;
     }
 
@@ -217,6 +221,8 @@ void searchEntry(){
     }
     if (!found){
         printf("Contact does not exist.\n");
+        printf("Press Any Key To Exit!\n");
+        getch();
     }
 }
 
@@ -227,6 +233,8 @@ void editContact() {
 
     if (totalContact == 0){
         printf("No available contacts yet.\n");
+        printf("Press Any Key To Exit!\n");
+        getch();
         return;
     }
 
@@ -250,44 +258,52 @@ void editContact() {
     // Prompt user for new details
     char newName[50];
     char newContactNum[15];
-    int validNum, duplicateNum;
+    int validNum, duplicateNum, resultName, resultNum = 0;
 
-    printf("Enter new name (leave blank to keep current name):\n");
-    fgets(newName, sizeof(newName), stdin);
-    newName[strcspn(newName, "\n")] = 0; // Remove trailing newline
+    do {
+        printf("Enter New Name (leave blank to keep name):\n");
+        fgets(newName, sizeof(newName), stdin);
+        newName[strcspn(newName, "\n")] = 0;
+        resultName = checkName(newName);
+        // Only update name if new name is provided
+        if (strlen(newName) > 0) {
+            if (resultName) {
+                printf("Name already exists, please enter a different name.\n");
+            }
+            strcpy(contact[contactIndex].name, newName);
+        }
+    }while (resultName != 0);
 
-    // Only update name if new name is provided
-    if (strlen(newName) > 0) {
-        if (checkName(newName)) {
-            printf("Name already exists. Please enter a different name.\n");
+    do {
+        printf("Enter New Contact Number (leave blank to keep contact number):\n");
+        fgets(newContactNum, sizeof(newContactNum), stdin);
+        newContactNum[strcspn(newContactNum, "\n")] = 0;
+
+        // Only update contact number if new number is provided
+        if (strlen(newContactNum) > 0) {
+            validNum = checkNum(newContactNum);
+            duplicateNum = noDuplicate(newContactNum);
+
+            if (validNum && duplicateNum) {
+                strcpy(contact[contactIndex].contactNum, newContactNum);
+                resultNum = 1;
+            }
+            else {
+                if (!validNum) {
+                    printf("Invalid contact number.\n");
+                }
+                if (!duplicateNum) {
+                    printf("Contact number already exists.\n");
+                }
+            }
+        }
+        else {
             return;
         }
-        strcpy(contact[contactIndex].name, newName);
-    }
+    }while (resultNum != 1);
 
-    printf("Enter new contact number (leave blank to keep current number):\n");
-    fgets(newContactNum, sizeof(newContactNum), stdin);
-    newContactNum[strcspn(newContactNum, "\n")] = 0; // Remove trailing newline
 
-    // Only update contact number if new number is provided
-    if (strlen(newContactNum) > 0) {
-        validNum = checkNum(newContactNum);
-        duplicateNum = noDuplicate(newContactNum);
-
-        if (validNum && duplicateNum) {
-            strcpy(contact[contactIndex].contactNum, newContactNum);
-        } else {
-            if (!validNum) {
-                printf("Invalid contact number.\n");
-            }
-            if (!duplicateNum) {
-                printf("Contact number already exists.\n");
-            }
-            return;
-        }
-    }
-
-    printf("Contact updated successfully.\n");
+    printf("Entry Successfully Edited!.\n");
 }
 
 void deleteContact(){
@@ -296,6 +312,8 @@ void deleteContact(){
 
     if (totalContact == 0){
         printf("No available contacts yet.\n");
+        printf("Press Any Key To Exit!\n");
+        getch();
         return;
     }
 

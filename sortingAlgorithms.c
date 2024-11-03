@@ -22,7 +22,7 @@ int main() {
     double selectionTime = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Time taken for selection sort is: %fseconds\n", selectionTime);
 
-
+    //insertion sort
     generateArray(arr, n);
     start = clock();
     insertionSort(arr, n);
@@ -36,11 +36,8 @@ int main() {
 }
 
 void generateArray(int arr[], int n) {
-    for (int i = 1; i < n; i+=2) {
+    for (int i = 0; i < n; i++) {
         arr[i] = rand() % n;
-        if (i + 1 < n) {
-            arr[i + 1] = rand() % n;
-        }
     }
 }
 
@@ -95,4 +92,3 @@ void printArray(int arr[], int n) {
     }
     printf("\n");
 }
-

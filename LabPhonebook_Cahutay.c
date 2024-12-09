@@ -53,7 +53,7 @@ int main(){
 
 //print options
 void options(){
-    char *optionArr[6] = {"Add Entry","View Entry","Edit Entry","Delete Entry","Search Entry","Exit"};
+    char optionArr[6][20] = {"Add Entry","View Entry","Edit Entry","Delete Entry","Search Entry","Exit"};
 
     printf("Press, \n");
     for (int i = 0; i < 6; i++){
@@ -133,7 +133,8 @@ void addContact(){
 
             if (validNum && duplicateNum) {
                 break;
-            } else {
+            }
+            else {
                 if (!validNum) {
                     printf("Invalid contact number, please enter a valid one.\n");
                 }
@@ -302,8 +303,7 @@ void editContact() {
         }
     }while (resultNum != 1);
 
-
-    printf("Entry Successfully Edited!.\n");
+    printf("Entry Successfully Edited!\n");
 }
 
 void deleteContact(){

@@ -9,7 +9,7 @@ void getRandomNum(int arr[], int n, int random);
 void printArray(int arr[], int n);
 
 int main() {
-    int n = 80000;
+    int n = 10000;
     int arr[n];
 
     srand(time(0));
@@ -20,7 +20,7 @@ int main() {
     selectionSort(arr, n);
     clock_t end = clock();
     double selectionTime = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Time taken for selection sort is: %fseconds\n", selectionTime);
+    printf("Time taken for selection sort is: %.2fmilliseconds\n", selectionTime* 1000);
 
     //insertion sort
     generateArray(arr, n);
@@ -28,7 +28,7 @@ int main() {
     insertionSort(arr, n);
     end = clock();
     double insertionTime = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Time taken for insertion sort is: %fseconds\n", insertionTime);
+    printf("Time taken for insertion sort is: %.2fmilliseconds\n", insertionTime * 1000);
 
 
 
